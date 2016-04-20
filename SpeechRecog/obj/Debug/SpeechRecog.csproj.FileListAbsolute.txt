@@ -1,0 +1,11 @@
+c:\users\ayush\documents\visual studio 2013\Projects\SpeechRecog\SpeechRecog\bin\Debug\SpeechRecog.exe.config
+c:\users\ayush\documents\visual studio 2013\Projects\SpeechRecog\SpeechRecog\bin\Debug\SpeechRecog.exe
+c:\users\ayush\documents\visual studio 2013\Projects\SpeechRecog\SpeechRecog\bin\Debug\SpeechRecog.pdb
+c:\users\ayush\documents\visual studio 2013\Projects\SpeechRecog\SpeechRecog\obj\Debug\SpeechRecog.csprojResolveAssemblyReference.cache
+c:\users\ayush\documents\visual studio 2013\Projects\SpeechRecog\SpeechRecog\obj\Debug\SpeechRecog.Form1.resources
+c:\users\ayush\documents\visual studio 2013\Projects\SpeechRecog\SpeechRecog\obj\Debug\SpeechRecog.Properties.Resources.resources
+c:\users\ayush\documents\visual studio 2013\Projects\SpeechRecog\SpeechRecog\obj\Debug\SpeechRecog.csproj.GenerateResource.Cache
+c:\users\ayush\documents\visual studio 2013\Projects\SpeechRecog\SpeechRecog\obj\Debug\SpeechRecog.exe
+c:\users\ayush\documents\visual studio 2013\Projects\SpeechRecog\SpeechRecog\obj\Debug\SpeechRecog.pdb
+C:\Users\Ayush\Documents\Visual Studio 2013\Projects\SpeechRecog\SpeechRecog\obj\Debug\Interop.SKYPE4COMLib.dll
+C:\Users\Ayush\Documents\Visual Studio 2013\Projects\SpeechRecog\SpeechRecog\obj\Debug\SpeechRecog.csproj.ResolveComReference.cache
