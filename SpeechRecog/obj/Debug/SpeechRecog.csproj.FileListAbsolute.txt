@@ -9,3 +9,14 @@ c:\users\ayush\documents\visual studio 2013\Projects\SpeechRecog\SpeechRecog\obj
 c:\users\ayush\documents\visual studio 2013\Projects\SpeechRecog\SpeechRecog\obj\Debug\SpeechRecog.pdb
 C:\Users\Ayush\Documents\Visual Studio 2013\Projects\SpeechRecog\SpeechRecog\obj\Debug\Interop.SKYPE4COMLib.dll
 C:\Users\Ayush\Documents\Visual Studio 2013\Projects\SpeechRecog\SpeechRecog\obj\Debug\SpeechRecog.csproj.ResolveComReference.cache
+C:\Bharat\Masters Material\SER 516\Project\SpeechRecognition\SpeechRecog\bin\Debug\SpeechRecog.exe.config
+C:\Bharat\Masters Material\SER 516\Project\SpeechRecognition\SpeechRecog\bin\Debug\SpeechRecog.exe
+C:\Bharat\Masters Material\SER 516\Project\SpeechRecognition\SpeechRecog\bin\Debug\SpeechRecog.pdb
+C:\Bharat\Masters Material\SER 516\Project\SpeechRecognition\SpeechRecog\obj\Debug\Interop.SKYPE4COMLib.dll
+C:\Bharat\Masters Material\SER 516\Project\SpeechRecognition\SpeechRecog\obj\Debug\SpeechRecog.csproj.ResolveComReference.cache
+C:\Bharat\Masters Material\SER 516\Project\SpeechRecognition\SpeechRecog\obj\Debug\SpeechRecog.Form1.resources
+C:\Bharat\Masters Material\SER 516\Project\SpeechRecognition\SpeechRecog\obj\Debug\SpeechRecog.Properties.Resources.resources
+C:\Bharat\Masters Material\SER 516\Project\SpeechRecognition\SpeechRecog\obj\Debug\SpeechRecog.csproj.GenerateResource.Cache
+C:\Bharat\Masters Material\SER 516\Project\SpeechRecognition\SpeechRecog\obj\Debug\SpeechRecog.exe
+C:\Bharat\Masters Material\SER 516\Project\SpeechRecognition\SpeechRecog\obj\Debug\SpeechRecog.pdb
+C:\Bharat\Masters Material\SER 516\Project\SpeechRecognition\SpeechRecog\obj\Debug\SpeechRecog.csprojResolveAssemblyReference.cache
