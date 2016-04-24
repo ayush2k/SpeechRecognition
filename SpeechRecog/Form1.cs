@@ -1,18 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Speech.Recognition;
 using System.Speech.Synthesis;
 using SKYPE4COMLib;
 using System.Diagnostics;
-using System.Threading;
-using System.Collections;
 
 
 namespace SpeechRecog
@@ -49,7 +43,7 @@ namespace SpeechRecog
             loadCities();
             Choices commands = new Choices();
             commands.Add(new String[] {"turn navigation off",
-                "turn blue tooth on", "blue tooth off", "play some music", "stop music",
+                "turn tooth on", "tooth off", "play some music", "stop music",
                  "end call"});
             GrammarBuilder builder = new GrammarBuilder(commands);
             Grammar grammar = new Grammar(builder);
@@ -63,18 +57,21 @@ namespace SpeechRecog
         void engine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
             switch (e.Result.Text){
-                case ("turn blue tooth on"):
+                case ("turn tooth on"):
                     richTextBox1.Text += e.Result.Text + "\n";
                     label2.Text = "Bluetooth ---> On";
+                    pictureBox1.ImageLocation = "C:/Bharat/Masters Material/SER 516/SpeechRecognition/bt.png";
                     break;
-                case ("blue tooth off"):
+                case ("tooth off"):
                     richTextBox1.Text += e.Result.Text + "\n";
                     label2.Text = "Bluetooth ---> Off";
+                    pictureBox1.ImageLocation = "C:/Bharat/Masters Material/SER 516/SpeechRecognition/btoff.png";
                     break;
                 case ("play some music"):
                     richTextBox1.Text += e.Result.Text + "\n";
                     label3.Text = "Music ---> On";
                     myMusic = Process.Start("wmplayer.exe", "C:/Users/Bharat/Downloads/Music/firestone.mp3");
+                    pictureBox2.ImageLocation = "C:/Bharat/Masters Material/SER 516/SpeechRecognition/ms.png";
                     break;
                 case ("stop music"):
                     richTextBox1.Text += e.Result.Text + "\n";
@@ -84,15 +81,17 @@ namespace SpeechRecog
                         myMusic.CloseMainWindow();
                         myMusic.Close();
                     }
+                    pictureBox2.ImageLocation = "C:/Bharat/Masters Material/SER 516/SpeechRecognition/msoff.png";
                     break;
                 case ("turn navigation off"):
                     richTextBox1.Text += e.Result.Text + "\n";
-                    label4.Text = "Navigation ---> Off";
                     if (myMap != null){
                         myMap.CloseMainWindow();
                         myMap.Close();
                     }
                     navInProgress = false;
+                    label4.Text = "Navigation ---> Off";
+                    pictureBox3.ImageLocation = "C:/Bharat/Masters Material/SER 516/SpeechRecognition/nvoff.png";
                     break;
                 case ("end call"):
                     if (call != null)
@@ -101,6 +100,8 @@ namespace SpeechRecog
                         call = null;
                     }
                     callInProgress = false;
+                    label4.Text = "Call ---> Off";
+                    pictureBox3.ImageLocation = "C:/Bharat/Masters Material/SER 516/SpeechRecognition/cloff.png";
                     break;
                 default:
                     if (!callInProgress && e.Result.Text.Contains("call")){
@@ -117,6 +118,8 @@ namespace SpeechRecog
                             synthesizer.SpeakAsync("\n Calling " + name);
                             richTextBox1.Text += "\nCall processed";
                             callInProgress = true;
+                            label5.Text = "Call ---> On";
+                            pictureBox4.ImageLocation = "C:/Bharat/Masters Material/SER 516/SpeechRecognition/cl.png";
                         }
                         else
                         {
@@ -128,10 +131,11 @@ namespace SpeechRecog
                     {
                         richTextBox1.Text += e.Result.Text + "\n";
                         string destination = e.Result.Semantics["city"].Value.ToString();
-                        myMap = Process.Start("firefox.exe", "https://www.google.com/maps/dir/Mesa/" + destination);
+                        myMap = Process.Start("https://www.google.com/maps/dir/Mesa/" + destination);
                         navInProgress = true;
                         label4.Text = "Navigation ---> On";
-                    
+                        pictureBox3.ImageLocation = "C:/Bharat/Masters Material/SER 516/SpeechRecognition/nv.png";
+
                     }
 
                     break; 
@@ -176,6 +180,11 @@ namespace SpeechRecog
             builder.Append(new SemanticResultKey("city", citiesChoices));
             Grammar grammar = new Grammar(builder);
             engine.LoadGrammarAsync(grammar);
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
