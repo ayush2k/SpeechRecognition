@@ -17,17 +17,16 @@ using System.Collections;
 
 namespace SpeechRecog
 {
-
-
     public partial class Form1 : Form
     {
+        Boolean callInProgress = false;
+        Boolean navInProgress = false;
         Process myMusic;
         Process myMap;
         SpeechRecognitionEngine engine = new SpeechRecognitionEngine();
         SpeechSynthesizer synthesizer = new SpeechSynthesizer();
         Skype skype = new Skype();
         Call call = null;
-        Choices commands = new Choices();
         List<User> contacts = new List<User>();
 
         public Form1()
@@ -37,6 +36,8 @@ namespace SpeechRecog
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //TimeSpan t = new TimeSpan(8);
+            //engine.Recognize(t);
             engine.RecognizeAsync(RecognizeMode.Multiple);
             button2.Enabled = true;
             button1.Enabled = false;
@@ -44,9 +45,12 @@ namespace SpeechRecog
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            commands.Add(new String[] { "say hello", "say my name", "navigate to", "tempe", "turn navigation off",
+            loadContacts();
+            loadCities();
+            Choices commands = new Choices();
+            commands.Add(new String[] {"turn navigation off",
                 "turn blue tooth on", "blue tooth off", "play some music", "stop music",
-                "turn navigation on", "call someone", "end call"});
+                 "end call"});
             GrammarBuilder builder = new GrammarBuilder(commands);
             Grammar grammar = new Grammar(builder);
             engine.LoadGrammarAsync(grammar);
@@ -58,19 +62,22 @@ namespace SpeechRecog
 
         void engine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            richTextBox1.Text += e.Result.Text;
             switch (e.Result.Text){
                 case ("turn blue tooth on"):
+                    richTextBox1.Text += e.Result.Text + "\n";
                     label2.Text = "Bluetooth ---> On";
                     break;
                 case ("blue tooth off"):
+                    richTextBox1.Text += e.Result.Text + "\n";
                     label2.Text = "Bluetooth ---> Off";
                     break;
                 case ("play some music"):
+                    richTextBox1.Text += e.Result.Text + "\n";
                     label3.Text = "Music ---> On";
                     myMusic = Process.Start("wmplayer.exe", "C:/Users/Bharat/Downloads/Music/firestone.mp3");
                     break;
                 case ("stop music"):
+                    richTextBox1.Text += e.Result.Text + "\n";
                     label3.Text = "Music ---> Off";
                     if (myMusic != null)
                     {
@@ -79,41 +86,13 @@ namespace SpeechRecog
                     }
                     break;
                 case ("turn navigation off"):
-                    label3.Text = "Music ---> Off";
+                    richTextBox1.Text += e.Result.Text + "\n";
+                    label4.Text = "Navigation ---> Off";
                     if (myMap != null){
                         myMap.CloseMainWindow();
                         myMap.Close();
                     }
-                    break;
-                case ("navigate to"):
-                    richTextBox1.Text += "\nNavigation On";
-                    myMap = Process.Start("https://www.google.com/maps/dir/Tempe/San+Diego");
-                    break;
-                case ("say hello"):
-                    richTextBox1.Text += "\nsay hello processed";
-                    synthesizer.SpeakAsync("Hello! How you doing");
-                    break;
-                case("say my name"):
-                    synthesizer.SpeakAsync("\n Hi Ayush");
-                    richTextBox1.Text += "\nsay my name processed";
-                    break;
-                case ("call someone"):
-                    string name = "echo123";
-                    User caller = contacts.Where(user => user.FullName.ToLower().IndexOf(name.ToLower()) > -1).
-                                                Select(user => new User
-                                                {
-                                                    Handle = user.Handle
-                                                }).FirstOrDefault();
-                    if (caller != null)
-                    {
-                        skype.PlaceCall(caller.Handle);
-                        synthesizer.SpeakAsync("\n Calling " + name);
-                        richTextBox1.Text += "\nCall processed";
-                    }
-                    else
-                    {
-                        synthesizer.SpeakAsync("Contact Not Found");
-                    }
+                    navInProgress = false;
                     break;
                 case ("end call"):
                     if (call != null)
@@ -121,10 +100,41 @@ namespace SpeechRecog
                         call.Finish();
                         call = null;
                     }
+                    callInProgress = false;
                     break;
                 default:
-                    richTextBox1.Text += "\nDefault in";
-                    break;
+                    if (!callInProgress && e.Result.Text.Contains("call")){
+                        richTextBox1.Text += e.Result.Text + "\n";
+                        string name = e.Result.Semantics["person"].Value.ToString();
+                        User caller = contacts.Where(user => user.FullName.ToLower().IndexOf(name.ToLower()) > -1).
+                                                    Select(user => new User
+                                                    {
+                                                        Handle = user.Handle
+                                                    }).FirstOrDefault();
+                        if (caller != null)
+                        {
+                            call = skype.PlaceCall(caller.Handle);
+                            synthesizer.SpeakAsync("\n Calling " + name);
+                            richTextBox1.Text += "\nCall processed";
+                            callInProgress = true;
+                        }
+                        else
+                        {
+                            synthesizer.SpeakAsync("Contact Not Found");
+                        }
+                        richTextBox1.Text += "\nDefault in";
+                    }
+                    else if (!navInProgress && e.Result.Text.Contains("navigate to"))
+                    {
+                        richTextBox1.Text += e.Result.Text + "\n";
+                        string destination = e.Result.Semantics["city"].Value.ToString();
+                        myMap = Process.Start("firefox.exe", "https://www.google.com/maps/dir/Mesa/" + destination);
+                        navInProgress = true;
+                        label4.Text = "Navigation ---> On";
+                    
+                    }
+
+                    break; 
             }
         }
 
@@ -138,11 +148,34 @@ namespace SpeechRecog
         public void loadContacts()
         {
             contacts.Clear();
+            List<string> contactsName = new List<string>();
             foreach (User user in skype.Friends)
             {
-                contacts.Add(user);
+                if (user.FullName != null && !user.FullName.Equals(""))
+                {
+                    contacts.Add(user);
+                    contactsName.Add(user.FullName.Split(' ')[0]);
+                }
                 //contactsView.Items.Add(user.FullName);
             }
+            Choices contactChoices = new Choices();
+            contactChoices.Add(contactsName.ToArray());
+
+            GrammarBuilder builder = new GrammarBuilder();
+            builder.Append("call");
+            builder.Append(new SemanticResultKey("person", contactChoices));
+            Grammar grammar = new Grammar(builder);
+            engine.LoadGrammarAsync(grammar);
+        }
+
+        public void loadCities()
+        {
+            Choices citiesChoices = new Choices(new string[] { "Tempe", "Phoenix", "Chicago", "Austin", "Miami", "Dallas" });
+            GrammarBuilder builder = new GrammarBuilder();
+            builder.Append("navigate to");
+            builder.Append(new SemanticResultKey("city", citiesChoices));
+            Grammar grammar = new Grammar(builder);
+            engine.LoadGrammarAsync(grammar);
         }
     }
 }

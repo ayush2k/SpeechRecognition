@@ -20,3 +20,14 @@ C:\Bharat\Masters Material\SER 516\Project\SpeechRecognition\SpeechRecog\obj\Deb
 C:\Bharat\Masters Material\SER 516\Project\SpeechRecognition\SpeechRecog\obj\Debug\SpeechRecog.exe
 C:\Bharat\Masters Material\SER 516\Project\SpeechRecognition\SpeechRecog\obj\Debug\SpeechRecog.pdb
 C:\Bharat\Masters Material\SER 516\Project\SpeechRecognition\SpeechRecog\obj\Debug\SpeechRecog.csprojResolveAssemblyReference.cache
+C:\Users\Ayush\Documents\visual studio 2013\Projects\SpeechRecognition\SpeechRecog\bin\Debug\SpeechRecog.exe.config
+C:\Users\Ayush\Documents\visual studio 2013\Projects\SpeechRecognition\SpeechRecog\obj\Debug\Interop.SKYPE4COMLib.dll
+C:\Users\Ayush\Documents\visual studio 2013\Projects\SpeechRecognition\SpeechRecog\obj\Debug\SpeechRecog.csproj.ResolveComReference.cache
+C:\Users\Ayush\Documents\visual studio 2013\Projects\SpeechRecognition\SpeechRecog\obj\Debug\SpeechRecog.exe
+C:\Users\Ayush\Documents\visual studio 2013\Projects\SpeechRecognition\SpeechRecog\obj\Debug\SpeechRecog.pdb
+C:\Users\Ayush\Documents\visual studio 2013\Projects\SpeechRecognition\SpeechRecog\bin\Debug\SpeechRecog.exe
+C:\Users\Ayush\Documents\visual studio 2013\Projects\SpeechRecognition\SpeechRecog\bin\Debug\SpeechRecog.pdb
+C:\Users\Ayush\Documents\visual studio 2013\Projects\SpeechRecognition\SpeechRecog\obj\Debug\SpeechRecog.csprojResolveAssemblyReference.cache
+C:\Users\Ayush\Documents\visual studio 2013\Projects\SpeechRecognition\SpeechRecog\obj\Debug\SpeechRecog.Form1.resources
+C:\Users\Ayush\Documents\visual studio 2013\Projects\SpeechRecognition\SpeechRecog\obj\Debug\SpeechRecog.Properties.Resources.resources
+C:\Users\Ayush\Documents\visual studio 2013\Projects\SpeechRecognition\SpeechRecog\obj\Debug\SpeechRecog.csproj.GenerateResource.Cache
