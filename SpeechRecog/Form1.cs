@@ -42,8 +42,8 @@ namespace SpeechRecog
             loadContacts();
             loadCities();
             Choices commands = new Choices();
-            commands.Add(new String[] {"turn navigation off",
-                "turn tooth on", "tooth off", "play some music", "stop music",
+            commands.Add(new String[] {"stop navigation",
+                "turn tooth on", "turn tooth off", "play some music", "stop music",
                  "end call"});
             GrammarBuilder builder = new GrammarBuilder(commands);
             Grammar grammar = new Grammar(builder);
@@ -58,19 +58,22 @@ namespace SpeechRecog
         {
             switch (e.Result.Text){
                 case ("turn tooth on"):
-                    richTextBox1.Text += e.Result.Text + "\n";
+                    richTextBox1.Text += "Turn Bluetooth On\n";
                     label2.Text = "Bluetooth ---> On";
                     pictureBox1.ImageLocation = "C:/Bharat/Masters Material/SER 516/SpeechRecognition/bt.png";
                     break;
-                case ("tooth off"):
-                    richTextBox1.Text += e.Result.Text + "\n";
+                case ("turn tooth off"):
+                    richTextBox1.Text += "turn Bluetooth off\n";
                     label2.Text = "Bluetooth ---> Off";
                     pictureBox1.ImageLocation = "C:/Bharat/Masters Material/SER 516/SpeechRecognition/btoff.png";
                     break;
                 case ("play some music"):
                     richTextBox1.Text += e.Result.Text + "\n";
                     label3.Text = "Music ---> On";
-                    myMusic = Process.Start("wmplayer.exe", "C:/Users/Bharat/Downloads/Music/firestone.mp3");
+                    if (myMusic == null)
+                    {
+                        myMusic = Process.Start("wmplayer.exe", "C:/Users/Bharat/Downloads/Music/firestone.mp3");
+                    }
                     pictureBox2.ImageLocation = "C:/Bharat/Masters Material/SER 516/SpeechRecognition/ms.png";
                     break;
                 case ("stop music"):
@@ -80,14 +83,16 @@ namespace SpeechRecog
                     {
                         myMusic.CloseMainWindow();
                         myMusic.Close();
+                        myMusic = null;
                     }
                     pictureBox2.ImageLocation = "C:/Bharat/Masters Material/SER 516/SpeechRecognition/msoff.png";
                     break;
-                case ("turn navigation off"):
+                case ("stop navigation"):
                     richTextBox1.Text += e.Result.Text + "\n";
                     if (myMap != null){
                         myMap.CloseMainWindow();
                         myMap.Close();
+                        myMap = null;
                     }
                     navInProgress = false;
                     label4.Text = "Navigation ---> Off";
@@ -100,8 +105,8 @@ namespace SpeechRecog
                         call = null;
                     }
                     callInProgress = false;
-                    label4.Text = "Call ---> Off";
-                    pictureBox3.ImageLocation = "C:/Bharat/Masters Material/SER 516/SpeechRecognition/cloff.png";
+                    label5.Text = "Call ---> Off";
+                    pictureBox4.ImageLocation = "C:/Bharat/Masters Material/SER 516/SpeechRecognition/cloff.png";
                     break;
                 default:
                     if (!callInProgress && e.Result.Text.Contains("call")){
